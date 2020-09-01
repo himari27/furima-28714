@@ -41,7 +41,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :products
-- has_many :purchase
+- has_many :product_purchases
 
 
 
@@ -60,9 +60,9 @@ Things you may want to cover:
 
 ### Association
 
-- has_many :comments
+
 - belongs_to :user
-- belongs_to :purchase
+- belongs_to :product_purchases
 - belongs_to_active_hash :prefecture
 - belongs_to_active_hash :categories
 - belongs_to_active_hash :brands
@@ -84,21 +84,11 @@ Things you may want to cover:
 
 ### Association
 
-- belongs_to :products
+- belongs_to :product_purchases
 
-## comments テーブル
 
-| Column          | Type   | Options     |
-| --------------- | ------ | ----------- |
-| text         | string | null: false |
-| product_id   | integer | null: false, foreign_key: true |
-| user_id      | integer | null: false, foreign_key: true |
 
-### Association
-
-- belongs_to :products
-
-## purchase テーブル
+## product_purchases テーブル
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
