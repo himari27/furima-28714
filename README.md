@@ -56,15 +56,17 @@ Things you may want to cover:
 | shipping_fee_id    | integer | null: false |
 | prefecture_id      | integer | null: false |
 | shipping_days_id   | integer | null: false |
+| brands_id          | integer | null: false |
+| category_id        | integer | null: false |
 | user_id            | integer | null: false, foreign_key: true |
 
 ### Association
 
 
 - belongs_to :user
-- belongs_to :product_purchases
+- has_one :product_purchases
 - belongs_to_active_hash :prefecture
-- belongs_to_active_hash :categories
+- belongs_to_active_hash :category_id
 - belongs_to_active_hash :brands
 - belongs_to_active_hash :shipping_fee_id
 - belongs_to_active_hash :shipping_days_id
@@ -72,15 +74,16 @@ Things you may want to cover:
 
 ## destination テーブル
 
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| post_code          | string  | null: false |
-| city               | string  | null: false |
-| address            | string  | null: false |
-| building_name      | string  |             |
-| phone_number       | integer | null: false |
-| prefecture_id      | integer | null: false |
-| user_id            | integer | null: false, foreign_key: true |
+| Column                | Type    | Options     |
+| --------------------- | ------- | ----------- |
+| post_code             | string  | null: false |
+| city                  | string  | null: false |
+| address               | string  | null: false |
+| building_name         | string  |             |
+| phone_number          | integer | null: false |
+| prefecture_id         | integer | null: false |
+| user_id               | integer | null: false, foreign_key: true |
+| product_purchases_id  | integer | null: false, foreign_key: true |
 
 ### Association
 
@@ -96,5 +99,5 @@ Things you may want to cover:
 | product_id         | integer | null: false, foreign_key: true |
 
 -belongs_to :user
--has_many :products
--has_many :destination
+-belongs_to :products
+-has_one :destination
