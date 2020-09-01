@@ -41,8 +41,8 @@ Things you may want to cover:
 ### Association
 
 - has_many :products
-- belongs_to :destination
-- belongs_to :credit_card
+- has_many :purchase
+
 
 
 ## products テーブル
@@ -50,22 +50,19 @@ Things you may want to cover:
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | name               | string | null: false |
-| product_name       | string | null: false |
-| product_text       | string | null: false |
-| condition_id       | string | null: false |
-| shipping_fee_id    | string | null: false |
-| prefecture_id      | string | null: false |
-| shipping_days_id   | string | null: false |
-| price              | string | null: false |
-| user_id            | integer | null: false |
-| brand_id           | integer | null: false |
-| category_id        | integer | null: false |
+| text               | string | null: false |
+| price              | integer | null: false |
+| condition_id       | integer | null: false |
+| shipping_fee_id    | integer | null: false |
+| prefecture_id      | integer | null: false |
+| shipping_days_id   | integer | null: false |
+| user_id            | integer | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :images
 - has_many :comments
-- belongs_to :users
+- belongs_to :user
+- belongs_to :purchase
 - belongs_to_active_hash :prefecture
 - belongs_to_active_hash :categories
 - belongs_to_active_hash :brands
@@ -78,37 +75,12 @@ Things you may want to cover:
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
 | post_code          | string  | null: false |
-| prefecture_id      | string  | null: false |
 | city               | string  | null: false |
 | address            | string  | null: false |
 | building_name      | string  |             |
-| phone_number       | string  | null: false |
+| phone_number       | integer | null: false |
+| prefecture_id      | integer | null: false |
 | user_id            | integer | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :users
-
-## credit_card テーブル
-
-| Column            | Type       | Options                        |
-| ----------------- | ---------- | ------------------------------ |
-| card_number       | string  | null: false |
-| months            | string  | null: false |
-| year              | string  | null: false |
-| security_code     | string  | null: false |
-| user_id           | integer | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :users
-
-## images テーブル
-
-| Column          | Type   | Options     |
-| --------------- | ------ | ----------- |
-| image           | string | null: false |
-| product_id      | integer | null: false, foreign_key: true |
 
 ### Association
 
@@ -125,3 +97,14 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :products
+
+## purchase テーブル
+
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| user_id            | integer | null: false, foreign_key: true |
+| product_id         | integer | null: false, foreign_key: true |
+
+-belongs_to :user
+-has_many :products
+-has_many :destination
