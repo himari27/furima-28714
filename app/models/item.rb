@@ -13,9 +13,17 @@ class Item < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 300, message: 'must be more than 300' }
   validates :price, numericality: { less_than_or_equal_to: 9_999_999, message: 'must be lower than 9,999,999' }
 
-  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_fee_id, numericality: { other_than: 1, message: "can't be blank" }
+  with_options numericality:{ other_than: 1, message: "can't be blank" } do
+    validates :category_id 
+    validates :condition_id
+    validates :prefecture_id
+    validates :shipping_day_id
+    validates :shipping_fee_id
+  end
 end
+
+# validates :category_id , numericality: { other_than: 1, message: "can't be blank" }
+# validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
+# validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+# validates :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" }
+# validates :shipping_fee_id, numericality: { other_than: 1, message: "can't be blank" }
