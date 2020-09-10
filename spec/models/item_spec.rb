@@ -8,7 +8,7 @@ RSpec.describe Item, type: :model do
   end
 
   describe '出品登録' do
-    it "正しく入力されている場合は出品できる" do
+    it '正しく入力されている場合は出品できる' do
       expect(@item).to be_valid
     end
     it '出品画像が選択されていないと出品できない' do
