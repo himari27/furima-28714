@@ -40,12 +40,12 @@ Things you may want to cover:
 
 ### Association
 
-- has_many :products
-- has_many :product_purchases
+- has_many :items
+- has_many :item_purchases
 
 
 
-## products テーブル
+## items テーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
@@ -63,7 +63,7 @@ Things you may want to cover:
 
 
 - belongs_to :user
-- has_one :product_purchases
+- has_one :item_purchases
 - belongs_to_active_hash :prefecture
 - belongs_to_active_hash :category_id
 - belongs_to_active_hash :brands
@@ -85,11 +85,11 @@ Things you may want to cover:
 
 ### Association
 
-- belongs_to :product_purchase
+- belongs_to :item_purchase
 
 
 
-## product_purchases テーブル
+## item_purchases テーブル
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
@@ -97,5 +97,5 @@ Things you may want to cover:
 | product_id         | integer | null: false, foreign_key: true |
 
 -belongs_to :user
--belongs_to :product
+-belongs_to :item
 -has_one :destination
