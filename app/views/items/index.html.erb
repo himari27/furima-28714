@@ -125,7 +125,7 @@
     <h2 class='title'>ピックアップカテゴリー</h2>
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
-     <%if @item.empty? %>
+     <%if @items.empty? %>
         <li class='list'>
         <%= link_to '#' do %>
         <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
@@ -144,7 +144,7 @@
         <% end %>
       </li>
      <% else %>
-      <% @item.each do |item| %>
+      <% @items.each do |item| %>
         <li class='list'>
           <%= link_to '#' do %>
           <%= image_tag item.image, class: "item-img" %>
