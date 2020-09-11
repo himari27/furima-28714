@@ -10,11 +10,14 @@ class ItemsController < ApplicationController
     else
       render :new
     end
-    # 保存できたらルートに飛ぶ、できなかったらnewにもどる
   end
 
   def new
     @item = Item.new
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
