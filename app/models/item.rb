@@ -22,4 +22,3 @@ class Item < ApplicationRecord
     validates :shipping_fee_id
   end
 end
-
