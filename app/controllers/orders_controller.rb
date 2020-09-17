@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :move_to_login, only: [:index]
+  before_action :move_to_index, only: [:index]
+  before_action :move_to_index_2, only: [:index]
 
   def index
     @item = Item.find(params[:item_id])
@@ -35,6 +38,31 @@ class OrdersController < ApplicationController
       currency:'jpy'
     )
   end
+
+  def move_to_login
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
+  end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if user_signed_in? && ItemPurchase.exists?(item_id:@item.id)
+      redirect_to root_path
+    end
+  end
+
+  def move_to_index_2
+    @item = Item.find(params[:item_id])
+    if user_signed_in? && (current_user.id == @item.user_id)
+      redirect_to root_path
+    end
+  end
+
 end
 
+
+   # elsif
+    #   user_signed_in? &&  (@item.item_purchase.item_id == @item.id)
+    #   redirect_to root_path
 
