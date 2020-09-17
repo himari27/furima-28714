@@ -27,10 +27,10 @@ class ItemsController < ApplicationController
 
   def destroy
     if @item.destroy
-    redirect_to root_path
-    else 
+      redirect_to root_path
+    else
       render :show
-    end  
+    end
   end
 
   def update
@@ -52,10 +52,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in?
   end
-
-
 end
