@@ -22,9 +22,9 @@ class OrdersController < ApplicationController
   private
 
   def order_purchase_params
-
+    # binding.pry
     @item = Item.find(params[:item_id])
-    params.require(:order_purchase).permit(:post_code, :city, :address, :building_name, :phone_number, :prefecture_id).merge(user_id: current_user.id).merge(price: @item.price).merge(item_id: params[:item_id]).merge(token: params[:token])
+    params.require(:order_purchase).permit(:token, :post_code, :city, :address, :building_name, :phone_number, :prefecture_id).merge(user_id: current_user.id).merge(price: @item.price).merge(item_id: params[:item_id])
   end
 
   def pay_item
