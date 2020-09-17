@@ -20,6 +20,11 @@ RSpec.describe OrderPurchase, type: :model do
       @order_purchase.valid?
       expect(@order_purchase.errors.full_messages).to include("Post code can't be blank", 'Post code is invalid. Include hyphen(-)')
     end
+    it '郵便番号はハイフンが入力されてないと購入できない' do
+      @order_purchase.post_code = '6310024'
+      @order_purchase.valid?
+      expect(@order_purchase.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
+    end
     it '都道府県が入力されてないと購入できない' do
       @order_purchase.prefecture_id = nil
       @order_purchase.valid?
@@ -39,6 +44,11 @@ RSpec.describe OrderPurchase, type: :model do
       @order_purchase.phone_number = nil
       @order_purchase.valid?
       expect(@order_purchase.errors.full_messages).to include("Phone number can't be blank", 'Phone number is invalid. Without hyphen(-)')
+    end
+    it '電話番号にはハイフンが入力されていると購入できない' do
+      @order_purchase.phone_number = '090-1234121'
+      @order_purchase.valid?
+      expect(@order_purchase.errors.full_messages).to include('Phone number is invalid. Without hyphen(-)')
     end
   end
 end

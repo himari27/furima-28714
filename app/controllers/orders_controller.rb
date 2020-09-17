@@ -2,23 +2,19 @@ class OrdersController < ApplicationController
   before_action :move_to_login, only: [:index]
   before_action :move_to_index, only: [:index]
   before_action :move_to_index_2, only: [:index]
+  before_action :set_order, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @order_purchase = OrderPurchase.new
   end
 
   def create
     @order_purchase = OrderPurchase.new(order_purchase_params)
-    # binding.pry
     if @order_purchase.valid?
       pay_item
-      # binding.pry
       @order_purchase.save
       redirect_to root_path
     else
-      # binding.pry
-      @item = Item.find(params[:item_id])
       render 'index'
     end
   end
@@ -31,7 +27,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = 'sk_test_9009f488776dc6c57b6fe3cb'
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: order_purchase_params[:price],
       card: order_purchase_params[:token],
@@ -49,11 +45,12 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index_2
-    @item = Item.find(params[:item_id])
+    # @item = Item.find(params[:item_id])
     redirect_to root_path if user_signed_in? && (current_user.id == @item.user_id)
   end
-end
 
-# elsif
-#   user_signed_in? &&  (@item.item_purchase.item_id == @item.id)
-#   redirect_to root_path
+  def set_order
+    @item = Item.find(params[:item_id])
+  end
+
+end

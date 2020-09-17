@@ -11,7 +11,6 @@ class OrderPurchase
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
 
   def save
-    # binding.pry
     item_purchase = ItemPurchase.create(user_id: user_id, item_id: item_id)
     Destination.create(post_code: post_code, prefecture_id: prefecture_id, city: city, address: address, building_name: building_name, phone_number: phone_number, item_purchase_id: item_purchase.id)
   end
